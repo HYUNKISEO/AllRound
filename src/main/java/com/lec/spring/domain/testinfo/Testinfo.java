@@ -1,6 +1,8 @@
 package com.lec.spring.domain.testinfo;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -15,6 +17,7 @@ import lombok.NoArgsConstructor;
 public class Testinfo {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String docregstartdt;
     private String docregenddt;
@@ -26,6 +29,7 @@ public class Testinfo {
     private String pracexamstartdt;
     private String pracexamenddt;
     private String pracpassstartartdt;
+    private String pracpassenddt;
     private String implplannm;
     private String jmfldnm;
     private String fee;
