@@ -28,10 +28,9 @@ public class Testinfo {
     private String pracregenddt;
     private String pracexamstartdt;
     private String pracexamenddt;
-    private String pracpassstartartdt;
+    private String pracpassstartdt;
     private String pracpassenddt;
     private String implplannm;
     private String jmfldnm;
-    private String fee;
-
+    private String contents;
 }
