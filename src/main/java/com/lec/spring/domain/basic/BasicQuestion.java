@@ -24,10 +24,4 @@ public class BasicQuestion {
     private String input;
     private String output;
 
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
-    @JoinColumn(name = "basic_question_id")
-    @ToString.Exclude
-    @Builder.Default
-    private List<BasicAttempt> basicAttempts = new ArrayList<>();
-
 }

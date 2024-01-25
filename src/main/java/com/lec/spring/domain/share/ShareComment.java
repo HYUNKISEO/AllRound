@@ -1,5 +1,6 @@
 package com.lec.spring.domain.share;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.lec.spring.domain.BaseEntity;
 import com.lec.spring.domain.user.User;
 import jakarta.persistence.*;
@@ -23,5 +24,11 @@ public class ShareComment extends BaseEntity {
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;
+
+    @ManyToOne
+    @JsonIgnore
+    @JoinColumn(name = "Question_id")
+    private Question question;
+
 
 }
