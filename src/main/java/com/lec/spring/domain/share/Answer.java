@@ -20,4 +20,12 @@ public class Answer {
 
     private String userAnswer;
 
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
+
+    @ManyToOne
+    @JoinColumn(name = "Question_id")
+    private Question question;
+
 }

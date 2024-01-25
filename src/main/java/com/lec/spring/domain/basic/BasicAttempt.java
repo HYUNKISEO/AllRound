@@ -20,6 +20,14 @@ public class BasicAttempt {
 
     private String userAnswer;
 
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
+
+    @ManyToOne
+    @JoinColumn(name = "BasicQuestion_id")
+    private BasicQuestion basicQuestion;
+
     private boolean corret;
 
 }

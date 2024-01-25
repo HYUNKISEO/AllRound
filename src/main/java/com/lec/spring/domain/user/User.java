@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.lec.spring.domain.BaseEntity;
 import com.lec.spring.domain.basic.BasicAttempt;
 import com.lec.spring.domain.share.Answer;
+import com.lec.spring.domain.share.Question;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -43,17 +44,5 @@ public class User extends BaseEntity {
     @ToString.Exclude
     @Builder.Default
     private List<Authority> authorities = new ArrayList<>();
-
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
-    @JoinColumn(name = "user_id")
-    @ToString.Exclude
-    @Builder.Default
-    private List<BasicAttempt> basicAttempts = new ArrayList<>();
-
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
-    @JoinColumn(name = "user_id")
-    @ToString.Exclude
-    @Builder.Default
-    private List<Answer> answers = new ArrayList<>();
 
 }

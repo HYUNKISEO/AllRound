@@ -1,6 +1,7 @@
 package com.lec.spring.domain.share;
 
 import com.lec.spring.domain.BaseEntity;
+import com.lec.spring.domain.user.User;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -30,11 +31,9 @@ public class Question extends BaseEntity {
     private String input;
     private String output;
 
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
-    @JoinColumn(name = "question_id")
-    @ToString.Exclude
-    @Builder.Default
-    private List<Answer> answerList = new ArrayList<>();
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
 
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinColumn(name = "question_id")
