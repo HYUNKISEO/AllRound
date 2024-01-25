@@ -1,7 +1,8 @@
 package com.lec.spring.service.testinfo;
 
+import com.lec.spring.domain.testinfo.DTO.BookRequest;
 import com.lec.spring.domain.testinfo.Testinfo;
-import com.lec.spring.domain.testinfo.TestinfoResponse;
+import com.lec.spring.domain.testinfo.DTO.TestinfoResponse;
 import com.lec.spring.repository.testinfo.TestinfoRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
@@ -13,8 +14,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
 
-import javax.swing.text.html.parser.Entity;
 import java.net.URI;
+import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
 import java.util.List;
 
 @Service
@@ -94,7 +96,7 @@ public class TestinfoService {
     }
 
 
-    public String naverBook () {
+    public String naverBook (BookRequest bookRequest) {
 
         String baseUri = "https://openapi.naver.com/v1/search/book_adv.json";
 
@@ -104,10 +106,10 @@ public class TestinfoService {
 
         URI uri = UriComponentsBuilder
                 .fromUriString(baseUri)
+                .queryParam("d_titl", URLEncoder.encode(bookRequest.getKeyword(),  StandardCharsets.UTF_8))
                 .queryParam("display", 10)
                 .queryParam("sort", "date")
-                .queryParam("d_title", "정보처리기사")
-                .build()
+                .build(true)
                 .toUri();
 
         RequestEntity<Void> requestEntity = RequestEntity.get(uri)

@@ -41,5 +41,5 @@ public class Post extends BaseEntity {
     @JoinColumn(name = "post_id")
     @ToString.Exclude
     @Builder.Default
-    private List<BoardComment> comments = new ArrayList<>();
+    private List<PostComment> comments = new ArrayList<>();
 }
