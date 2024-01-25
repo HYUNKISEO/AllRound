@@ -19,4 +19,8 @@ public class BasicAttemptService {
         return basicAttemptRepository.save(basicAttempt);
     }
 
+    public BasicAttempt findById (Long id) {
+        return basicAttemptRepository.findById(id).orElse(null);
+    }
+
 }

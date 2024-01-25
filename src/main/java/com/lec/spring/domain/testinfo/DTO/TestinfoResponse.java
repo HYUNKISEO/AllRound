@@ -1,6 +1,7 @@
-package com.lec.spring.domain.testinfo;
+package com.lec.spring.domain.testinfo.DTO;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.lec.spring.domain.testinfo.Testinfo;
 import lombok.Data;
 
 import java.util.List;

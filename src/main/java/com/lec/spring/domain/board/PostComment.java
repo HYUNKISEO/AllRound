@@ -13,7 +13,7 @@ import lombok.*;
 @ToString(callSuper = true)
 @EqualsAndHashCode(callSuper = true)
 @Entity(name = "a_board_comment")
-public class BoardComment extends BaseEntity {
+public class PostComment extends BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

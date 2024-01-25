@@ -19,13 +19,6 @@ public class ShareCommentService {
 
     private final QuestionRepository questionRepository;
 
-    public List<ShareComment> list(Long id) {
-        Question question = questionRepository.findById(id).orElse(null);
-
-        List<ShareComment> comments = question.getComments();
-
-        return comments;
-    }
 
     public ShareComment save (ShareComment comment){
         return shareCommentRepository.save(comment);

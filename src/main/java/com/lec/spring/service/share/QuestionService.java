@@ -18,10 +18,6 @@ public class QuestionService {
         return questionRepository.save(question);
     }
 
-    public Question update (Question question){
-        return questionRepository.save(question);
-    }
-
     public String delete (Long id){
         if(id != null){
             questionRepository.deleteById(id);
