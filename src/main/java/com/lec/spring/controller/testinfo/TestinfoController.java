@@ -20,6 +20,9 @@ public class TestinfoController {
     @GetMapping("/executeAutoSave")
     public void executeAutoSave() {testinfoService.autoSave();}
 
+    @GetMapping("/info")
+    public ResponseEntity<?> info(){return new ResponseEntity<>(testinfoService.test(), HttpStatus.OK);}
+
     @PostMapping("/book")
     public ResponseEntity<?> book(@RequestBody BookRequest bookRequest) {return new ResponseEntity<>(testinfoService.naverBook(bookRequest), HttpStatus.OK);}
 }
