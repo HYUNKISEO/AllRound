@@ -26,7 +26,6 @@ public class PostComment extends BaseEntity {
     private User user;
 
     @ManyToOne
-    @JsonIgnore
     @JoinColumn(name = "post_id")
     private Post post;
 

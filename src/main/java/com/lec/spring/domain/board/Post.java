@@ -31,15 +31,10 @@ public class Post extends BaseEntity {
     private String category;
 
     @ColumnDefault(value = "0")
-    private Long viewCnt;
+    private Long viewCnt = 0L;
 
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;
 
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
-    @JoinColumn(name = "post_id")
-    @ToString.Exclude
-    @Builder.Default
-    private List<PostComment> comments = new ArrayList<>();
 }

@@ -45,7 +45,7 @@ public class User extends BaseEntity {
     private String phone;
 
     @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    @JsonIgnore
+//    @JsonIgnore
     @ToString.Exclude
     @Builder.Default
     private List<Authority> authorities = new ArrayList<>();
