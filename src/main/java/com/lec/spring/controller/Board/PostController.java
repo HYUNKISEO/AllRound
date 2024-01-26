@@ -9,25 +9,25 @@ import org.springframework.web.bind.annotation.*;
 
 @RequiredArgsConstructor
 @RestController
-@RequestMapping("/board")
+@RequestMapping("/board/post")
 @CrossOrigin
 public class PostController {
 
     private final PostService postService;
 
-    @GetMapping("/post/list")
+    @GetMapping("/list")
     public ResponseEntity<?> list() {return new ResponseEntity<>(postService.findAll(), HttpStatus.OK);}
 
-    @GetMapping("/post/detail/{id}")
+    @GetMapping("/detail/{id}")
     public ResponseEntity<?> detail(@PathVariable Long id) {return new ResponseEntity<>(postService.findById(id), HttpStatus.OK);}
 
-    @PostMapping("/post/save")
+    @PostMapping("/save")
     public ResponseEntity<?> save(@RequestBody Post post) {return new ResponseEntity<>(postService.save(post), HttpStatus.OK);}
 
-    @PutMapping("/post/update")
+    @PutMapping("/update")
     public ResponseEntity<?> update(@RequestBody Post post) {return new ResponseEntity<>(postService.update(post), HttpStatus.OK);}
 
-    @DeleteMapping("/post/delete/{id}")
+    @DeleteMapping("/delete/{id}")
     public ResponseEntity<?> delete(@PathVariable Long id) {return new ResponseEntity<>(postService.delete(id), HttpStatus.OK);}
 
 }

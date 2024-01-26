@@ -9,22 +9,22 @@ import org.springframework.web.bind.annotation.*;
 
 @RequiredArgsConstructor
 @RestController
-@RequestMapping("/share")
+@RequestMapping("/share/question")
 @CrossOrigin
 public class QuestionController {
 
     private final QuestionService questionService;
 
-    @GetMapping("/question/list")
+    @GetMapping("/list")
     public ResponseEntity<?> list() {return new ResponseEntity<>(questionService.findAll(), HttpStatus.OK);}
 
-    @GetMapping("/question/detail/{id}")
+    @GetMapping("/detail/{id}")
     public ResponseEntity<?> detail(@PathVariable Long id) {return new ResponseEntity<>(questionService.findById(id), HttpStatus.OK);}
 
-    @PostMapping("/question/save")
+    @PostMapping("/save")
     public ResponseEntity<?> save(@RequestBody Question question){return new ResponseEntity<>(questionService.save(question), HttpStatus.OK);}
 
-    @DeleteMapping("/question/delete/{id}")
+    @DeleteMapping("/delete/{id}")
     public ResponseEntity<?> delete(@PathVariable Long id) {return new ResponseEntity<>(questionService.delete(id), HttpStatus.OK);}
 
 }

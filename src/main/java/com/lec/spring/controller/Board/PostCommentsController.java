@@ -9,25 +9,25 @@ import org.springframework.web.bind.annotation.*;
 
 @RequiredArgsConstructor
 @RestController
-@RequestMapping("/board")
+@RequestMapping("/board/comment")
 @CrossOrigin
 public class PostCommentsController {
 
     private final PostCommentService postCommentService;
 
-    @GetMapping("/comment/list")
+    @GetMapping("/list")
     public ResponseEntity<?> list() {return new ResponseEntity<>(postCommentService.findAll(), HttpStatus.OK);}
 
-    @GetMapping("/comment/detail/{id}")
+    @GetMapping("/detail/{id}")
     public ResponseEntity<?> detail(@PathVariable Long id) {return new ResponseEntity<>(postCommentService.findById(id), HttpStatus.OK);}
 
-    @PostMapping("/comment/save")
+    @PostMapping("/save")
     public ResponseEntity<?> save(@RequestBody PostComment postComment) {return new ResponseEntity<>(postCommentService.save(postComment), HttpStatus.OK);}
 
-    @PutMapping("/comment/update")
+    @PutMapping("/update")
     public ResponseEntity<?> update(@RequestBody PostComment postComment) {return new ResponseEntity<>(postCommentService.update(postComment), HttpStatus.OK);}
 
-    @DeleteMapping("/comment/delete/{id}")
+    @DeleteMapping("/delete/{id}")
     public ResponseEntity<?> delete(@PathVariable Long id) {return new ResponseEntity<>(postCommentService.delete(id), HttpStatus.OK);}
 
 
