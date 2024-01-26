@@ -9,25 +9,25 @@ import org.springframework.web.bind.annotation.*;
 
 @RequiredArgsConstructor
 @RestController
-@RequestMapping("/share")
+@RequestMapping("/share/comment")
 @CrossOrigin
 public class ShareCommentController {
 
     private final ShareCommentService shareCommentService;
 
-    @GetMapping("/comment/list")
+    @GetMapping("/list")
     public ResponseEntity<?> list() {return new ResponseEntity<>(shareCommentService.findAll(), HttpStatus.OK);}
 
-    @GetMapping("/comment/detail/{id}")
+    @GetMapping("/detail/{id}")
     public ResponseEntity<?> detail(@PathVariable Long id) {return new ResponseEntity<>(shareCommentService.findById(id), HttpStatus.OK);}
 
-    @PostMapping("/comment/save")
+    @PostMapping("/save")
     public ResponseEntity<?> save(@RequestBody ShareComment shareComment) {return new ResponseEntity<>(shareCommentService.save(shareComment), HttpStatus.OK);}
 
-    @PutMapping("/comment/update")
+    @PutMapping("/update")
     public ResponseEntity<?> update(@RequestBody ShareComment shareComment) {return new ResponseEntity<>(shareCommentService.update(shareComment), HttpStatus.OK);}
 
-    @DeleteMapping("/comment/delete/{id}")
+    @DeleteMapping("/delete/{id}")
     public ResponseEntity<?> delete(@PathVariable Long id) {return new ResponseEntity<>(shareCommentService.deleteById(id), HttpStatus.OK);}
 
 

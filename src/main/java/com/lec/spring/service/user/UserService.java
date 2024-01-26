@@ -19,16 +19,11 @@ public class UserService {
 
     private final AuthorityRepository authorityRepository;
 
-    private PasswordEncoder passwordEncoder;
-
-
     public User findById(Long id){return userRepository.findById(id).orElse(null);}
 
     public List<User> findAll(){return userRepository.findAll(Sort.by(Sort.Order.desc("id")));}
 
     public User save(User user) {
-
-        user.setPassword(passwordEncoder.encode(user.getPassword()));
 
         Authority auth = authorityRepository.findByName("MEMBER");
         if (auth == null){
@@ -41,7 +36,12 @@ public class UserService {
     }
 
     public User update(User user) {
-        return userRepository.save(user);
+        User updateUser = userRepository.findById(user.getId()).orElse(null);
+
+        updateUser.setPassword(user.getPassword());
+        updateUser.setPhone(user.getPhone());
+
+        return userRepository.save(updateUser);
     }
 
     public String delete(Long id){

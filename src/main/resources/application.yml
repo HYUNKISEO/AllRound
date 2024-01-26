@@ -22,7 +22,7 @@ spring:
       hibernate.format_sql: true   # 쿼리 포맷팅 출력
 
     hibernate:
-      ddl-auto: create
+      ddl-auto: update
 
   # security
   security:

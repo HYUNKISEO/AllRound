@@ -9,16 +9,16 @@ import org.springframework.web.bind.annotation.*;
 
 @RequiredArgsConstructor
 @RestController
-@RequestMapping("/share")
+@RequestMapping("/share/like")
 @CrossOrigin
 public class LikeController {
 
     private final LikeService likeService;
 
-    @PostMapping("/like/save")
+    @PostMapping("/save")
     public ResponseEntity<?> save(@RequestBody Like like) {return new ResponseEntity<>(likeService.save(like), HttpStatus.OK);}
 
-    @DeleteMapping("/like/delete/{id}")
+    @DeleteMapping("/delete/{id}")
     public ResponseEntity<?> delete(@PathVariable Long id) {return new ResponseEntity<>(likeService.delete(id), HttpStatus.OK);}
 
 }

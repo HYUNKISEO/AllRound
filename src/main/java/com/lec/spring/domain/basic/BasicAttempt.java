@@ -28,6 +28,6 @@ public class BasicAttempt {
     @JoinColumn(name = "BasicQuestion_id")
     private BasicQuestion basicQuestion;
 
-    private boolean corret;
+    private String corret;
 
 }

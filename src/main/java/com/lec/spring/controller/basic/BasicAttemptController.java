@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RequiredArgsConstructor
 @RestController
-@RequestMapping("/basic")
+@RequestMapping("/basic/attempt")
 @CrossOrigin
 public class BasicAttemptController {
 
