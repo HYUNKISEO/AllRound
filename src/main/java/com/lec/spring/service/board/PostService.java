@@ -5,6 +5,7 @@ import com.lec.spring.repository.board.PostRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -22,8 +23,13 @@ public class PostService {
         return postRepository.save(post);
     }
 
+    @Transactional
     public Post findById (Long id) {
-        return postRepository.findById(id).orElse(null);
+
+        Post post = postRepository.findById(id).orElse(null);
+        post.setViewCnt(post.getViewCnt() + 1L);
+
+        return postRepository.save(post);
     }
 
     public List<Post> findAll () {
