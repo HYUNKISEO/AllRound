@@ -1,6 +1,6 @@
 package com.lec.spring.controller.testinfo;
 
-import com.lec.spring.domain.testinfo.DTO.BookRequest;
+import com.lec.spring.domain.testinfo.BookRequest;
 import com.lec.spring.service.testinfo.TestinfoService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,8 +15,7 @@ import org.springframework.web.bind.annotation.*;
 @CrossOrigin
 public class TestinfoController {
 
-    @Autowired
-    private TestinfoService testinfoService;
+    private final TestinfoService testinfoService;
 
     @GetMapping("/executeAutoSave")
     public void executeAutoSave() {testinfoService.autoSave();}

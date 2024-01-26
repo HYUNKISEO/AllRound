@@ -1,4 +1,4 @@
-package com.lec.spring.domain.testinfo.DTO;
+package com.lec.spring.domain.testinfo;
 
 import lombok.Data;
 

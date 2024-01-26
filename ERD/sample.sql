@@ -4,6 +4,8 @@ show tables;
 select * from a_user;
 select * from a_post;
 select * from a_board_comment;
+select * from a_question;
+select * from a_like;
 
 
 select * from a_testinfo;
@@ -16,6 +18,7 @@ ALTER TABLE a_authority
     DROP CONSTRAINT UK_sq6lwmnd95tb0kc75s1tjqrs5;
 
 DROP TABLE basic_attempt;
+DROP TABLE a_like;
 
 ALTER TABLE user_authority DROP CONSTRAINT FK4ojeblvl273tr6bx50tcg3awn;
 

@@ -28,7 +28,11 @@ public class QuestionService {
     }
 
     public Question findById (Long id) {
-        return questionRepository.findById(id).orElse(null);
+        Question question = questionRepository.findById(id).orElse(null);
+
+        question.setViewCnt(question.getViewCnt() + 1L);
+
+        return questionRepository.save(question);
     }
 
     public List<Question> findAll () {return questionRepository.findAll(Sort.by(Sort.Order.desc("id")));}

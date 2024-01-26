@@ -1,8 +1,8 @@
 package com.lec.spring.service.testinfo;
 
-import com.lec.spring.domain.testinfo.DTO.BookRequest;
+import com.lec.spring.domain.testinfo.BookRequest;
 import com.lec.spring.domain.testinfo.Testinfo;
-import com.lec.spring.domain.testinfo.DTO.TestinfoResponse;
+import com.lec.spring.domain.testinfo.TestinfoResponse;
 import com.lec.spring.repository.testinfo.TestinfoRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;

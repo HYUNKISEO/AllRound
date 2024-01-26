@@ -15,6 +15,9 @@ public class LikeController {
 
     private final LikeService likeService;
 
+    @GetMapping("/count")
+    public ResponseEntity<?> count(@RequestParam("questionId") Long questionId) {return new ResponseEntity<>(likeService.count(questionId), HttpStatus.OK);}
+
     @PostMapping("/save")
     public ResponseEntity<?> save(@RequestBody Like like) {return new ResponseEntity<>(likeService.save(like), HttpStatus.OK);}
 
