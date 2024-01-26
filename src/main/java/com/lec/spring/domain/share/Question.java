@@ -4,6 +4,7 @@ import com.lec.spring.domain.BaseEntity;
 import com.lec.spring.domain.user.User;
 import jakarta.persistence.*;
 import lombok.*;
+import org.hibernate.annotations.ColumnDefault;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -30,15 +31,11 @@ public class Question extends BaseEntity {
     private String answer;
     private String input;
     private String output;
+    @ColumnDefault(value = "0")
+    private Long viewCnt = 0L;
 
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;
-
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
-    @JoinColumn(name = "question_id")
-    @ToString.Exclude
-    @Builder.Default
-    private List<ShareComment> comments = new ArrayList<>();
 
 }

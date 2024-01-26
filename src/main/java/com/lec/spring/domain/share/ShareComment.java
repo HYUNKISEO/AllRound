@@ -26,7 +26,6 @@ public class ShareComment extends BaseEntity {
     private User user;
 
     @ManyToOne
-    @JsonIgnore
     @JoinColumn(name = "Question_id")
     private Question question;
 
