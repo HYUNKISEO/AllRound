@@ -9,7 +9,7 @@ select * from a_like;
 
 
 select * from a_testinfo;
-
+delete from a_testinfo;
 select * from a_authority;
 
 ALTER TABLE a_user DROP CONSTRAINT UK_3nstbuhppkiorpc6ms42mluut;

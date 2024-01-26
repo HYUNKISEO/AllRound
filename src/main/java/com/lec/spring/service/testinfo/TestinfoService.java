@@ -43,17 +43,17 @@ public class TestinfoService {
     public void autoSave() {
         testinfoRepository.deleteAll();
 
-        retrieveAndSaveTestinfo(1320);
-        retrieveAndSaveFeeList(1320);
+        List<Testinfo> testInfo1 = retrieveAndSaveTestinfo(1320);
+        retrieveAndSaveFeeList(1320, testInfo1);
 
-        retrieveAndSaveTestinfo(2290);
-        retrieveAndSaveFeeList(2290);
+        List<Testinfo> testInfo2 = retrieveAndSaveTestinfo(2290);
+        retrieveAndSaveFeeList(2290, testInfo2);
 
-        retrieveAndSaveTestinfo(6921);
-        retrieveAndSaveFeeList(6921);
+        List<Testinfo> testInfo3 = retrieveAndSaveTestinfo(6921);
+        retrieveAndSaveFeeList(6921, testInfo3);
     }
 
-    private void retrieveAndSaveTestinfo(int jmCd) {
+    private List<Testinfo> retrieveAndSaveTestinfo(int jmCd) {
         String baseUri = "http://openapi.q-net.or.kr/api/service/rest/InquiryTestInformationNTQSVC/getJMList?";
         URI uri = buildUri(baseUri, jmCd);
 
@@ -62,10 +62,10 @@ public class TestinfoService {
 
         List<Testinfo> testinfoList = responseEntity.getBody().getResponse().getBody().getItems().getItem();
 
-        testinfoRepository.saveAll(testinfoList);
+        return testinfoRepository.saveAll(testinfoList);
     }
 
-    private void retrieveAndSaveFeeList(int jmCd) {
+    private void retrieveAndSaveFeeList(int jmCd, List<Testinfo> testinfo) {
         String baseUri = "http://openapi.q-net.or.kr/api/service/rest/InquiryTestInformationNTQSVC/getFeeList?";
         URI uri = buildUriForFeeList(baseUri, jmCd);
 
@@ -74,7 +74,13 @@ public class TestinfoService {
 
         List<Testinfo> testinfoList = responseEntity.getBody().getResponse().getBody().getItems().getItem();
 
-        testinfoRepository.saveAll(testinfoList);
+        testinfoList.forEach(e -> {
+            for(Testinfo info: testinfo){
+                info.setContents(e.getContents());
+            }
+        });
+
+        testinfoRepository.saveAll(testinfo);
     }
 
     private URI buildUri(String baseUri, int jmCd) {
@@ -121,4 +127,9 @@ public class TestinfoService {
 
         return response;
     }
+
+    public List<Testinfo> test(){
+        return testinfoRepository.findAll();
+    }
+
 }
