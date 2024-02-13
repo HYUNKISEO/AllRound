@@ -17,7 +17,6 @@ public class ShareCommentService {
 
     private final ShareCommentRepository shareCommentRepository;
 
-    private final QuestionRepository questionRepository;
 
 
     public ShareComment save (ShareComment comment){
@@ -32,7 +31,7 @@ public class ShareCommentService {
         return shareCommentRepository.findById(id).orElse(null);
     }
 
-    public List<ShareComment> findAll(){return shareCommentRepository.findAll();}
+    public List<ShareComment> findAll(){return shareCommentRepository.findAll(Sort.by(Sort.Order.desc("id")));}
 
     public String deleteById(Long id){
         if(id != null){

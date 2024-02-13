@@ -2,11 +2,13 @@
 show tables;
 
 select * from a_user;
+select * from a_authority;
 select * from a_post;
 select * from a_board_comment;
 select * from a_question;
 select * from a_like;
 
+update a_authority set name = "ROLE_MEMBER";
 
 select * from a_testinfo;
 delete from a_testinfo;
