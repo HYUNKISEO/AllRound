@@ -5,6 +5,7 @@ import com.lec.spring.service.user.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 @RequiredArgsConstructor
@@ -29,6 +30,12 @@ public class UserController {
 
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<?> delete(@PathVariable Long id) {return new ResponseEntity<>(userService.delete(id), HttpStatus.OK);}
+
+    @GetMapping("/{username}")
+    @PreAuthorize("hasAnyRole('MEMBER','ADMIN')")
+    public ResponseEntity<User> getUserInfo(@PathVariable String username) {
+        return ResponseEntity.ok(userService.getUserWithAuthorities(username).get());
+    }
 
 
 }
