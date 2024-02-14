@@ -48,9 +48,9 @@ public class TokenProvider implements InitializingBean {
                 .map(GrantedAuthority::getAuthority)
                 .collect(Collectors.joining(","));
 
+        Object principal = authentication.getPrincipal();
         Long userId = null;
         String name = "";
-        Object principal = authentication.getPrincipal();
 
         CustomUserDetails userDetails = (CustomUserDetails) principal;
         userId = userDetails.getId(); // 'userId'를 추출합니다.
