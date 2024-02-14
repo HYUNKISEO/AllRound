@@ -5,14 +5,14 @@ import org.springframework.security.core.GrantedAuthority;
 import java.util.Collection;
 
 public class CustomUserDetails extends org.springframework.security.core.userdetails.User {
-
+    private static final long serialVersionUID = 1L;
     private final Long id; // 추가적인 사용자 정보
     private final String name;
 
 
 
 
-    public CustomUserDetails(String username, String password, Collection<? extends GrantedAuthority> authorities,String name , String nickname ,Long id ) {
+    public CustomUserDetails(String username, String password, Collection<? extends GrantedAuthority> authorities,String name  ,Long id ) {
         super(username, password, authorities);
         this.name = name;
         this.id = id;
