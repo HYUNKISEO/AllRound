@@ -60,7 +60,7 @@ public class SecurityConfig   {
                                 .requestMatchers("/api/authenticate").permitAll() //
                                 .requestMatchers("/user/save").permitAll() // 회원가입 api
                                 .requestMatchers("/user/login").permitAll() // 로그인 api
-                                .requestMatchers("/user/{username}").permitAll()
+                                .requestMatchers("/user/signup").permitAll()
                                 .anyRequest().permitAll()//
                 )
 
