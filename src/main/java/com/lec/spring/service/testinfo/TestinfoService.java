@@ -113,7 +113,7 @@ public class TestinfoService {
         URI uri = UriComponentsBuilder
                 .fromUriString(baseUri)
                 .queryParam("d_titl", URLEncoder.encode(bookRequest.getKeyword(),  StandardCharsets.UTF_8))
-                .queryParam("display", 10)
+                .queryParam("display", 20)
                 .queryParam("sort", "date")
                 .build(true)
                 .toUri();
