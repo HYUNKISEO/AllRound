@@ -35,6 +35,11 @@ UPDATE a_post SET view_cnt = 100 WHERE id = 3;
 
 DELETE FROM a_board_comment WHERE post_id IS NULL;
 
+insert into a_post (create_time, category, contents, subject, view_cnt, user_id)values
+(now(), '스터디', 'AAA' ,'sample_title', 0, 1),
+(now(), '질문', 'AAA' ,'sample_title', 0, 1),
+(now(), '일반', 'AAA' ,'sample_title', 0, 1);
+
 
 -- Add more INSERT statements for additional questions as needed
 

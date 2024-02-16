@@ -1,11 +1,15 @@
 package com.lec.spring.controller.Board;
 
+import com.lec.spring.domain.Dto.PostDto;
 import com.lec.spring.domain.board.Post;
 import com.lec.spring.service.board.PostService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.net.InterfaceAddress;
+import java.util.List;
 
 @RequiredArgsConstructor
 @RestController
@@ -16,13 +20,18 @@ public class PostController {
     private final PostService postService;
 
     @GetMapping("/list")
-    public ResponseEntity<?> list() {return new ResponseEntity<>(postService.findAll(), HttpStatus.OK);}
+    public ResponseEntity<?> list(@RequestParam(name = "pageNumber") Integer pageNumber, @RequestParam(name = "pageSize") Integer pageSize, @RequestParam(name = "sort") String sort) {
+        List<PostDto> postDtoList = postService.findAll(pageNumber, pageSize, sort);
+        return new ResponseEntity<>(postDtoList, HttpStatus.OK);
+    }
 
     @GetMapping("/detail/{id}")
-    public ResponseEntity<?> detail(@PathVariable Long id) {return new ResponseEntity<>(postService.findById(id), HttpStatus.OK);}
+    public ResponseEntity<?> detail(@PathVariable(name = "id") Long id) {return new ResponseEntity<>(postService.findById(id), HttpStatus.OK);}
 
     @PostMapping("/save")
-    public ResponseEntity<?> save(@RequestBody Post post) {return new ResponseEntity<>(postService.save(post), HttpStatus.OK);}
+    public ResponseEntity<?> save(@RequestBody PostDto post) {
+        System.out.println(post);
+        return new ResponseEntity<>(postService.save(post), HttpStatus.OK);}
 
     @PutMapping("/update")
     public ResponseEntity<?> update(@RequestBody Post post) {return new ResponseEntity<>(postService.update(post), HttpStatus.OK);}
