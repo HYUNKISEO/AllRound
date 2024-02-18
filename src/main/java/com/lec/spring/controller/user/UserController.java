@@ -1,5 +1,6 @@
 package com.lec.spring.controller.user;
 
+import com.lec.spring.domain.Dto.UserDto;
 import com.lec.spring.domain.user.User;
 import com.lec.spring.service.user.UserService;
 import lombok.RequiredArgsConstructor;
@@ -26,14 +27,14 @@ public class UserController {
     public ResponseEntity<?> save(@RequestBody User user) {return new ResponseEntity<>(userService.save(user), HttpStatus.OK);}
 
     @PutMapping("/update")
-    public ResponseEntity<?> update(@RequestBody User user) {return new ResponseEntity<>(userService.update(user), HttpStatus.OK);}
+    public ResponseEntity<?> update(@RequestBody UserDto user) {return new ResponseEntity<>(userService.update(user), HttpStatus.OK);}
 
     @DeleteMapping("/delete/{id}")
-    public ResponseEntity<?> delete(@PathVariable Long id) {return new ResponseEntity<>(userService.delete(id), HttpStatus.OK);}
+    public ResponseEntity<?> delete(@PathVariable(name = "id") Long id) {return new ResponseEntity<>(userService.delete(id), HttpStatus.OK);}
 
     @GetMapping("/{username}")
     @PreAuthorize("hasAnyRole('MEMBER','ADMIN')")
-    public ResponseEntity<User> getUserInfo(@PathVariable String username) {
+    public ResponseEntity<User> getUserInfo(@PathVariable(name = "username") String username) {
         return ResponseEntity.ok(userService.getUserWithAuthorities(username).get());
     }
 

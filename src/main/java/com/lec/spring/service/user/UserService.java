@@ -1,5 +1,6 @@
 package com.lec.spring.service.user;
 
+import com.lec.spring.domain.Dto.UserDto;
 import com.lec.spring.domain.user.Authority;
 import com.lec.spring.domain.user.User;
 import com.lec.spring.repository.user.AuthorityRepository;
@@ -28,9 +29,7 @@ public class UserService {
 
     public List<User> findAll(){return userRepository.findAll(Sort.by(Sort.Order.desc("id")));}
 
-    public User save(User user) {
-
-        System.out.println(user);
+    public String save(User user) {
 
         if(userRepository.existsByUsername(user.getUsername())){
             throw new RuntimeException("이미 가입되어 있는 유저입니다.");
@@ -44,14 +43,22 @@ public class UserService {
         }
         user.getAuthorities().add(auth);
         user.setPassword(passwordEncoder.encode(user.getPassword()));
-        return  userRepository.save(user);
+        userRepository.save(user);
+        return  "10";
     }
 
-    public User update(User user) {
-        User updateUser = userRepository.findById(user.getId()).orElse(null);
+    public User update(UserDto user) {
+        User updateUser = userRepository.findById(user.getUserId()).orElse(null);
 
-        updateUser.setPassword(passwordEncoder.encode(user.getPassword()));
-        updateUser.setPhone(user.getPhone());
+        if(passwordEncoder.matches(user.getPassword(), updateUser.getPassword())){
+            updateUser.setPassword(passwordEncoder.encode(user.getNewpassword()));
+        }else {
+            throw new IllegalArgumentException("현재 비밀번호가 맞지 않습니다.");
+        }
+
+        if(user.getPhone() != null && !user.getPhone().isEmpty()){
+            updateUser.setPhone(user.getPhone());
+        }
 
         return userRepository.save(updateUser);
     }
@@ -59,9 +66,9 @@ public class UserService {
     public String delete(Long id){
         if(id != null) {
             userRepository.deleteById(id);
-            return "삭제완료";
+            return "1";
         } else {
-            return "없는 회원";
+            return "0";
         }
     }
 

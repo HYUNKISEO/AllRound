@@ -30,13 +30,34 @@ public class PostService {
         savePost.setViewCnt(0L);
         savePost.setUser(userRepository.findById(post.getUserId()).orElse(null));
 
-        System.out.println(savePost);
+        return postRepository.save(savePost);
+    }
+
+    public Post update (PostDto post) {
+        Post savePost = new Post();
+        savePost.setId(post.getId());
+        savePost.setSubject(post.getSubject());
+        savePost.setContents(post.getContent());
+        savePost.setCategory(post.getCategory());
+        savePost.setViewCnt(post.getViewCnt());
+        savePost.setUser(userRepository.findById(post.getUserId()).orElse(null));
 
         return postRepository.save(savePost);
     }
 
-    public Post update (Post post) {
-        return postRepository.save(post);
+    public PostDto update (Long id) {
+        Post post = postRepository.findById(id).orElse(null);
+        PostDto mainPost = new PostDto();
+        mainPost.setId(post.getId());
+        mainPost.setCategory(post.getCategory());
+        mainPost.setContent(post.getContents());
+        mainPost.setSubject(post.getSubject());
+        mainPost.setUsername(post.getUser().getUsername());
+        mainPost.setViewCnt(post.getViewCnt());
+        mainPost.setCreateTime(post.getCreateTime());
+        mainPost.setUserId(post.getUser().getId());
+
+        return mainPost;
     }
 
     @Transactional
@@ -99,10 +120,17 @@ public class PostService {
     public String delete (Long id) {
         if(id != null) {
             postRepository.deleteById(id);
-            return "삭제 성공";
+            return "1";
         }else {
-            return "대상 없음";
+            return "0";
         }
     }
 
+    public List<PostDto> findByUserId(Long userId) {
+        List<Post> userPosts = postRepository.findByUserId(userId);
+        List<PostDto> postDtoList = userPosts.stream()
+                .map(this::convertToDTO)
+                .collect(Collectors.toList());
+        return postDtoList;
+    }
 }

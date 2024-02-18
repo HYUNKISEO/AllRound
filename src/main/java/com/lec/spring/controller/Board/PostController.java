@@ -28,15 +28,21 @@ public class PostController {
     @GetMapping("/detail/{id}")
     public ResponseEntity<?> detail(@PathVariable(name = "id") Long id) {return new ResponseEntity<>(postService.findById(id), HttpStatus.OK);}
 
+    @GetMapping("/update/{id}")
+    public ResponseEntity<?> update(@PathVariable(name = "id") Long id) {return new ResponseEntity<>(postService.update(id), HttpStatus.OK);}
+
     @PostMapping("/save")
     public ResponseEntity<?> save(@RequestBody PostDto post) {
         System.out.println(post);
         return new ResponseEntity<>(postService.save(post), HttpStatus.OK);}
 
     @PutMapping("/update")
-    public ResponseEntity<?> update(@RequestBody Post post) {return new ResponseEntity<>(postService.update(post), HttpStatus.OK);}
+    public ResponseEntity<?> update(@RequestBody PostDto post) {return new ResponseEntity<>(postService.update(post), HttpStatus.OK);}
 
     @DeleteMapping("/delete/{id}")
-    public ResponseEntity<?> delete(@PathVariable Long id) {return new ResponseEntity<>(postService.delete(id), HttpStatus.OK);}
+    public ResponseEntity<?> delete(@PathVariable(name = "id") Long id) {return new ResponseEntity<>(postService.delete(id), HttpStatus.OK);}
+
+    @GetMapping("/mylist/{id}")
+    public ResponseEntity<?> mylist(@PathVariable(name = "id") Long userId) {return new ResponseEntity<>(postService.findByUserId(userId), HttpStatus.OK);}
 
 }
