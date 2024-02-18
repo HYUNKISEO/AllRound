@@ -34,7 +34,7 @@ public class Question extends BaseEntity {
     @ColumnDefault(value = "0")
     private Long viewCnt = 0L;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "user_id")
     private User user;
 

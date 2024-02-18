@@ -20,7 +20,7 @@ public class BasicAttempt {
 
     private String userAnswer;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "user_id")
     private User user;
 
