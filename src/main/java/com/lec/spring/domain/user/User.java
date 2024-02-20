@@ -2,7 +2,9 @@ package com.lec.spring.domain.user;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.lec.spring.domain.BaseEntity;
+import com.lec.spring.domain.Listener.BaseEntity;
+import com.lec.spring.domain.Listener.UserHistory;
+import com.lec.spring.domain.Listener.UserHistoryListener;
 import com.lec.spring.domain.basic.BasicAttempt;
 import com.lec.spring.domain.board.Post;
 import com.lec.spring.domain.board.PostComment;
@@ -14,7 +16,6 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -25,6 +26,7 @@ import java.util.List;
 @ToString(callSuper = true)
 @EqualsAndHashCode(callSuper = true)
 @Entity(name = "a_user")
+@EntityListeners(UserHistoryListener.class)
 public class User extends BaseEntity {
 
     @Id
@@ -48,7 +50,7 @@ public class User extends BaseEntity {
 
     private String phone;
 
-    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @ManyToMany(fetch = FetchType.EAGER)
     @ToString.Exclude
     @Builder.Default
     private List<Authority> authorities = new ArrayList<>();

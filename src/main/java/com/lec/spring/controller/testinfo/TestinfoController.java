@@ -18,7 +18,15 @@ public class TestinfoController {
     private final TestinfoService testinfoService;
 
     @GetMapping("/executeAutoSave")
-    public void executeAutoSave() {testinfoService.autoSave();}
+    public ResponseEntity<String> executeAutoSave() {
+        try {
+            testinfoService.autoSave();
+            return ResponseEntity.ok("Auto save successful");
+        } catch (Exception e) {
+            // 예외가 발생한 경우
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error during auto save");
+        }
+    }
 
     @GetMapping("/info")
     public ResponseEntity<?> info(){return new ResponseEntity<>(testinfoService.test(), HttpStatus.OK);}

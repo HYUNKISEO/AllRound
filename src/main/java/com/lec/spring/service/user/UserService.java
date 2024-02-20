@@ -1,5 +1,6 @@
 package com.lec.spring.service.user;
 
+import com.lec.spring.domain.Dto.AdminDto;
 import com.lec.spring.domain.Dto.UserDto;
 import com.lec.spring.domain.user.Authority;
 import com.lec.spring.domain.user.User;
@@ -78,4 +79,33 @@ public class UserService {
         return userRepository.findOneWithAuthoritiesByUsername(username);
     }
 
+    public Object addAuth(Long id) {
+        User user = userRepository.findById(id).orElse(null);
+        Authority auth = authorityRepository.findByName("ROLE_ADMIN");
+        if (auth == null){
+            auth = new Authority();
+            auth.setName("ROLE_ADMIN");
+            authorityRepository.save(auth);
+        }
+        user.getAuthorities().add(auth);
+        return userRepository.save(user);
+    }
+
+    public Object removeAuth(Long id) {
+        User user = userRepository.findById(id).orElse(null);
+        Authority auth = authorityRepository.findByName("ROLE_ADMIN");
+        user.getAuthorities().remove(auth);
+        return userRepository.save(user);
+    }
+
+    public Object update(AdminDto adminDto) {
+        User user = userRepository.findById(adminDto.getId()).orElse(null);
+        if(user.getPassword() != adminDto.getPassword()) {
+            user.setPassword(passwordEncoder.encode(adminDto.getPassword()));
+        }
+        user.setPhone(adminDto.getPhone());
+        user.setDob(adminDto.getDob());
+        user.setName(adminDto.getName());
+        return userRepository.save(user);
+    }
 }

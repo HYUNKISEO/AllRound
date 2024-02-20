@@ -24,4 +24,8 @@ public class Authority {
     @Column(nullable = false, unique = true)
     private String name;
 
+    @ManyToMany
+    @JsonIgnore
+    private List<User> users = new ArrayList<>();
+
 }

@@ -1,4 +1,4 @@
-package com.lec.spring.domain;
+package com.lec.spring.domain.Listener;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;

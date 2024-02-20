@@ -25,6 +25,10 @@ public class PostController {
         return new ResponseEntity<>(postDtoList, HttpStatus.OK);
     }
 
+    @GetMapping("/admin")
+    public ResponseEntity<?> admin() {return new ResponseEntity<>(postService.findAll(), HttpStatus.OK);}
+
+
     @GetMapping("/detail/{id}")
     public ResponseEntity<?> detail(@PathVariable(name = "id") Long id) {return new ResponseEntity<>(postService.findById(id), HttpStatus.OK);}
 
