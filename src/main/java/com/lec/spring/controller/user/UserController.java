@@ -1,5 +1,6 @@
 package com.lec.spring.controller.user;
 
+import com.lec.spring.domain.Dto.AdminDto;
 import com.lec.spring.domain.Dto.UserDto;
 import com.lec.spring.domain.user.User;
 import com.lec.spring.service.user.UserService;
@@ -18,7 +19,7 @@ public class UserController {
     private final UserService userService;
 
     @GetMapping("/detail/{id}")
-    public ResponseEntity<?> detail(@PathVariable Long id) {return new ResponseEntity<>(userService.findById(id), HttpStatus.OK);}
+    public ResponseEntity<?> detail(@PathVariable(name = "id") Long id) {return new ResponseEntity<>(userService.findById(id), HttpStatus.OK);}
 
     @GetMapping("/list")
     public ResponseEntity<?> list() {return new ResponseEntity<>(userService.findAll(), HttpStatus.OK);}
@@ -37,6 +38,15 @@ public class UserController {
     public ResponseEntity<User> getUserInfo(@PathVariable(name = "username") String username) {
         return ResponseEntity.ok(userService.getUserWithAuthorities(username).get());
     }
+
+    @PostMapping("/admin/addauth/{id}")
+    public ResponseEntity<?> addAuth(@PathVariable(name = "id") Long id) {return new ResponseEntity<>(userService.addAuth(id), HttpStatus.OK);}
+
+    @PostMapping("/admin/removeauth/{id}")
+    public ResponseEntity<?> removeAuth(@PathVariable(name = "id") Long id) {return new ResponseEntity<>(userService.removeAuth(id), HttpStatus.OK);}
+
+    @PutMapping("/admin/update")
+    public ResponseEntity<?> update(@RequestBody AdminDto adminDto){return new ResponseEntity<>(userService.update(adminDto), HttpStatus.OK);}
 
 
 }

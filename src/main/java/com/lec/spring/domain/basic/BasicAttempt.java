@@ -1,5 +1,7 @@
 package com.lec.spring.domain.basic;
 
+import com.lec.spring.domain.Listener.BasicAttemptHistoryListener;
+import com.lec.spring.domain.Listener.PostHistoryListener;
 import com.lec.spring.domain.user.User;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -12,6 +14,7 @@ import lombok.NoArgsConstructor;
 @Data
 @Builder
 @Entity(name = "basic_attempt")
+@EntityListeners(BasicAttemptHistoryListener.class)
 public class BasicAttempt {
 
     @Id
@@ -20,7 +23,7 @@ public class BasicAttempt {
 
     private String userAnswer;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;
 

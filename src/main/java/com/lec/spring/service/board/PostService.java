@@ -133,4 +133,8 @@ public class PostService {
                 .collect(Collectors.toList());
         return postDtoList;
     }
+
+    public List<Post> findAll() {
+        return postRepository.findAll(Sort.by(Sort.Order.desc("id")));
+    }
 }

@@ -1,6 +1,9 @@
 package com.lec.spring.domain.share;
 
-import com.lec.spring.domain.BaseEntity;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.lec.spring.domain.Listener.BaseEntity;
+import com.lec.spring.domain.Listener.PostHistoryListener;
+import com.lec.spring.domain.Listener.ShareQuestionHistoryListener;
 import com.lec.spring.domain.user.User;
 import jakarta.persistence.*;
 import lombok.*;
@@ -16,6 +19,7 @@ import java.util.List;
 @ToString(callSuper = true)
 @EqualsAndHashCode(callSuper = true)
 @Entity(name = "a_question")
+@EntityListeners(ShareQuestionHistoryListener.class)
 public class Question extends BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -34,8 +38,20 @@ public class Question extends BaseEntity {
     @ColumnDefault(value = "0")
     private Long viewCnt = 0L;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;
+
+    @OneToMany(mappedBy = "question", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonIgnore
+    private List<ShareComment> comments = new ArrayList<>();
+
+    @OneToMany(mappedBy = "question", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonIgnore
+    private List<Like> likes = new ArrayList<>();
+
+    @OneToMany(mappedBy = "question", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonIgnore
+    private List<Answer> answers = new ArrayList<>();
 
 }
