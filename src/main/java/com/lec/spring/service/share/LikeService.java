@@ -29,7 +29,7 @@ public class LikeService {
         if (likeCount % 10 == 0) {
             LikeHistory likeHistory = LikeHistory.builder()
                     .like(savedLike)
-                    .content(savedLike.getUser().getUsername()+ " 님이 작성한 " + savedLike.getQuestion() + " 공유문제 추천누적 10개 증가 했습니다.")
+                    .content(savedLike.getUser().getUsername()+ " 님이 작성한 " + savedLike.getQuestion() + " 공유문제 추천누적" + likeCount + "개 돌파 했습니다.")
                     .build();
             likeHistoryRepository.save(likeHistory);
         }
