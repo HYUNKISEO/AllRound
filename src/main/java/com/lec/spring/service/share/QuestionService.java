@@ -1,6 +1,8 @@
 package com.lec.spring.service.share;
 
+import com.lec.spring.domain.Dto.PostDto;
 import com.lec.spring.domain.Dto.ShareDto;
+import com.lec.spring.domain.board.Post;
 import com.lec.spring.domain.share.Like;
 import com.lec.spring.domain.share.Question;
 import com.lec.spring.repository.share.QuestionRepository;
@@ -10,6 +12,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -77,6 +80,21 @@ public class QuestionService {
             }
         }
         return questions;
+    }
+
+    public List<ShareDto> findByUserId(Long userId) {
+        List<Question> userQuestion = questionRepository.findByUserId(userId);
+        List<ShareDto> questionDtoList = userQuestion.stream()
+                .map(this::convertToDTO)
+                .collect(Collectors.toList());
+        return questionDtoList;
+    }
+
+    private ShareDto convertToDTO(Question question) {
+        // Post를 PostDto로 매핑하는 로직을 작성
+        return new ShareDto(question.getId(), question.getQuestion(), question.getExampleInput(), question.getExampleOutput(), question.getComment(),
+        question.getAnswer(), question.getInput(), question.getOutput(), question.getViewCnt(), question.getLikeCnt(),question.getUser().getId() ,question.getCreateTime()
+        );
     }
 
 }

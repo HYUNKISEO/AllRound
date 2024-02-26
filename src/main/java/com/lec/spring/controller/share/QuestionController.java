@@ -27,4 +27,7 @@ public class QuestionController {
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<?> delete(@PathVariable(name = "id") Long id) {return new ResponseEntity<>(questionService.delete(id), HttpStatus.OK);}
 
+    @GetMapping("/mylist/{id}")
+    public ResponseEntity<?> mylist(@PathVariable(name = "id") Long userId) {return new ResponseEntity<>(questionService.findByUserId(userId), HttpStatus.OK);}
+
 }
