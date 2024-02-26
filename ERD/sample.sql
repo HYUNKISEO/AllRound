@@ -14,6 +14,7 @@ select * from a_like;
 select * from basic_question;
 select * from basic_attempt;
 select *from a_question;
+select *from a_answer;
 
 select * from a_user_history;
 select * from a_post_history;
@@ -38,7 +39,6 @@ delete from a_user_history;
 delete from a_share_history;
 delete from a_post_history;
 delete from a_like_history;
-
 
 
 
@@ -82,13 +82,13 @@ insert into a_board_comment(create_time, text, post_id, user_id)values
 insert into a_like(id, question_id, user_id) values (1, 1, 1);
 
 -- a_share_comment 테이블에 데이터 추가
-insert into a_share_comment(create_time, id, question_id, user_id, text) values ('2024-02-18 00:00:00', 1, 1, 1, 'Sample comment');
+insert into a_share_comment(create_time, id, question_id, user_id, text) values ('2024-02-18 09:00:00', 2, 2, 1, 'Sample comment');
 
 -- a_answer 테이블에 데이터 추가
 insert into a_answer(id, question_id, user_id, user_answer) values (1, 1, 1, 'Sample answer');
 
 -- a_question 테이블에 데이터 추가
-insert into a_question(create_time, id, user_id, view_cnt, answer, comment, example_input, example_output, input, output, question) values ('2024-02-18 00:00:00', 1, 1, 0, 'Sample answer', 'Sample comment', 'Sample input', 'Sample output', 'Sample input', 'Sample output', 'Sample question');
+insert into a_question(create_time, id, user_id, view_cnt, answer, comment, example_input, example_output, input, output, question, like_cnt) values ('2024-02-18 00:00:00', 1, 1, 0, 'Sample answer', 'Sample comment', 'Sample input', 'Sample output', 'Sample input', 'Sample output', 'Sample question', 0);
 
 -- basic_question 테이블에 데이터 추가
 insert into basic_question(comment, example_input, example_output, input, output, question) values ('Sample comment', 'Sample input', 'Sample output', 'Sample input', 'Sample output', 'Sample question');

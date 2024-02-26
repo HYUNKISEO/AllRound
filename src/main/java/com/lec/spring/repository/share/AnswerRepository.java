@@ -5,4 +5,5 @@ import com.lec.spring.domain.testinfo.Testinfo;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface AnswerRepository extends JpaRepository<Answer, Long> {
+    Answer findByUserIdAndQuestionId(Long userId, Long questionId);
 }

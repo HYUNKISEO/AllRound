@@ -11,7 +11,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
@@ -41,5 +43,23 @@ public class AuthController {
         httpHeaders.add(JwtFilter.AUTHORIZATION_HEADER, "Bearer " + jwt);
         // tokenDto를 이용해 response body에도 넣어서 리턴
         return new ResponseEntity<>(new TokenDto(jwt), httpHeaders, HttpStatus.OK);
+    }
+
+    @PostMapping("/refresh-token")
+    public ResponseEntity<TokenDto> refreshAccessToken(@RequestHeader(name = "Authorization") String token) {
+        try {
+            String authToken = token.substring(7);
+
+            // 받아온 토큰을 그대로 refreshToken 메서드에 전달
+            String newToken = tokenProvider.refreshToken(authToken);
+
+            // 새로운 토큰을 응답에 포함하여 반환
+            HttpHeaders httpHeaders = new HttpHeaders();
+            httpHeaders.add(JwtFilter.AUTHORIZATION_HEADER, "Bearer " + newToken);
+            return new ResponseEntity<>(new TokenDto(newToken), httpHeaders, HttpStatus.OK);
+        } catch (Exception e) {
+            // 적절한 처리를 수행
+            return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
+        }
     }
 }

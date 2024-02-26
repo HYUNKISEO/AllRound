@@ -37,6 +37,9 @@ public class Question extends BaseEntity {
     private String output;
     @ColumnDefault(value = "0")
     private Long viewCnt = 0L;
+    private int likeCnt;
+    @ElementCollection
+    private List<Long> userIds;
 
     @ManyToOne
     @JoinColumn(name = "user_id")
