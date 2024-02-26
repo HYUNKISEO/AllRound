@@ -12,6 +12,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 
 import java.security.Key;
@@ -110,4 +111,27 @@ public class TokenProvider implements InitializingBean {
         }
         return false;
     }
+
+    public String refreshToken(String authToken) {
+
+        Claims claims = Jwts.parserBuilder()
+                .setSigningKey(key)
+                .build()
+                .parseClaimsJws(authToken)
+                .getBody();
+
+        // 토큰의 expire 시간을 설정
+        long now = (new Date()).getTime();
+        Date validity = new Date(now + this.tokenValidityInMilliseconds);
+
+        return Jwts.builder()
+                .setSubject(claims.getSubject())
+                .claim(AUTHORITIES_KEY, claims.get("auth")) // 정보 저장
+                .claim("userId", claims.get("userId"))
+                .claim("name", claims.get("name"))
+                .signWith(key, SignatureAlgorithm.HS512) // 사용할 암호화 알고리즘과 , signature 에 들어갈 secret값 세팅
+                .setExpiration(validity) // set Expire Time 해당 옵션 안넣으면 expire안함
+                .compact();
+    }
+
 }

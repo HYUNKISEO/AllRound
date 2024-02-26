@@ -1,5 +1,6 @@
 package com.lec.spring.controller.share;
 
+import com.lec.spring.domain.Dto.LikeDto;
 import com.lec.spring.domain.share.Like;
 import com.lec.spring.service.share.LikeService;
 import lombok.RequiredArgsConstructor;
@@ -19,9 +20,9 @@ public class LikeController {
     public ResponseEntity<?> count(@PathVariable(name = "id") Long questionId) {return new ResponseEntity<>(likeService.count(questionId), HttpStatus.OK);}
 
     @PostMapping("/save")
-    public ResponseEntity<?> save(@RequestBody Like like) {return new ResponseEntity<>(likeService.save(like), HttpStatus.OK);}
+    public ResponseEntity<?> save(@RequestBody LikeDto like) {return new ResponseEntity<>(likeService.save(like), HttpStatus.OK);}
 
-    @DeleteMapping("/delete/{id}")
-    public ResponseEntity<?> delete(@PathVariable Long id) {return new ResponseEntity<>(likeService.delete(id), HttpStatus.OK);}
+    @DeleteMapping("/delete")
+    public ResponseEntity<?> delete(@RequestBody LikeDto like) {return new ResponseEntity<>(likeService.delete(like), HttpStatus.OK);}
 
 }

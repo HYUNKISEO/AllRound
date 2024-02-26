@@ -1,8 +1,9 @@
 package com.lec.spring.domain.Listener;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.lec.spring.domain.share.Like;
-import jakarta.persistence.*;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
 import lombok.*;
 
 @Data
@@ -17,11 +18,6 @@ public class LikeHistory extends BaseEntity{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
-    @ManyToOne
-    @JoinColumn(name = "Like_id", foreignKey = @ForeignKey(name = "none", value = ConstraintMode.NO_CONSTRAINT))
-    @JsonIgnore
-    private Like like;
 
     private String content;
 

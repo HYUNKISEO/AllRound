@@ -29,8 +29,8 @@ public class BasicAttemptHistoryListener {
     private void createAndSaveHistory(BasicAttempt basicAttempt, String content) {
         BasicAttemptHistoryRepository basicAttemptHistoryRepository = BeanUtils.getBean(BasicAttemptHistoryRepository.class);
         BasicAttemptHistory basicAttemptHistory = new BasicAttemptHistory();
-        basicAttemptHistory.setBasicAttempt(basicAttempt);
         basicAttemptHistory.setContent(content);
+        basicAttemptHistory.setType("기본문제");
         basicAttemptHistoryRepository.save(basicAttemptHistory);
     }
 

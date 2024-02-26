@@ -1,6 +1,6 @@
 package com.lec.spring.controller.share;
 
-import com.lec.spring.domain.share.Question;
+import com.lec.spring.domain.Dto.ShareDto;
 import com.lec.spring.service.share.QuestionService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -19,12 +19,12 @@ public class QuestionController {
     public ResponseEntity<?> list() {return new ResponseEntity<>(questionService.findAll(), HttpStatus.OK);}
 
     @GetMapping("/detail/{id}")
-    public ResponseEntity<?> detail(@PathVariable Long id) {return new ResponseEntity<>(questionService.findById(id), HttpStatus.OK);}
+    public ResponseEntity<?> detail(@PathVariable(name = "id") Long id) {return new ResponseEntity<>(questionService.findById(id), HttpStatus.OK);}
 
     @PostMapping("/save")
-    public ResponseEntity<?> save(@RequestBody Question question){return new ResponseEntity<>(questionService.save(question), HttpStatus.OK);}
+    public ResponseEntity<?> save(@RequestBody ShareDto question){return new ResponseEntity<>(questionService.save(question), HttpStatus.OK);}
 
     @DeleteMapping("/delete/{id}")
-    public ResponseEntity<?> delete(@PathVariable Long id) {return new ResponseEntity<>(questionService.delete(id), HttpStatus.OK);}
+    public ResponseEntity<?> delete(@PathVariable(name = "id") Long id) {return new ResponseEntity<>(questionService.delete(id), HttpStatus.OK);}
 
 }

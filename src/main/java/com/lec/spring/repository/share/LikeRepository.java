@@ -9,6 +9,5 @@ public interface LikeRepository extends JpaRepository<Like, Long> {
 
     Long countByQuestionId(Long questionId);
 
-
-    List<Like> findByQuestionId(Long questionId);
+    List<Like> findByQuestionIdAndUserId(Long questionId, Long userId);
 }
