@@ -31,7 +31,7 @@ public class Question extends BaseEntity {
     @Column(nullable = false)
     private String exampleOutput;
     private String comment;
-    @Column(nullable = false)
+    @Column(columnDefinition = "LONGTEXT", nullable = false)
     private String answer;
     private String input;
     private String output;
