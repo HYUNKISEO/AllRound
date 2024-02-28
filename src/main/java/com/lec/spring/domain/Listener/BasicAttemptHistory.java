@@ -18,10 +18,6 @@ public class BasicAttemptHistory extends BaseEntity{
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne
-    @JoinColumn(name = "basic_attempt_id", foreignKey = @ForeignKey(name = "none", value = ConstraintMode.NO_CONSTRAINT))
-    private BasicAttempt basicAttempt;
-
     private String content;
 
     private String type = "기본문제";

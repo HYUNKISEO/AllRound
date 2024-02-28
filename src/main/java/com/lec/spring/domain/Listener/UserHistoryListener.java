@@ -4,6 +4,7 @@ import com.lec.spring.domain.user.User;
 import com.lec.spring.repository.History.UserHistoryRepository;
 import jakarta.persistence.PostPersist;
 import jakarta.persistence.PostRemove;
+import jakarta.persistence.PreRemove;
 
 public class UserHistoryListener {
 
@@ -15,10 +16,17 @@ public class UserHistoryListener {
         }
     }
 
+    @PreRemove
+    public void remove(Object entity) {
+        if (entity instanceof User) {
+            User user = (User) entity;
+            createAndSaveHistory(user, user.getUsername() + " 님이 회원탈퇴 하였습니다.");
+        }
+    }
+
     private void createAndSaveHistory(User user, String content) {
         UserHistoryRepository userHistoryRepository = BeanUtils.getBean(UserHistoryRepository.class);
         UserHistory userHistory = new UserHistory();
-        userHistory.setUser(user);
         userHistory.setContent(content);
         userHistoryRepository.save(userHistory);
     }

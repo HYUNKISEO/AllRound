@@ -20,7 +20,6 @@ public class PostHistoryListener {
     private void createAndSaveHistory(Post post, String content) {
         PostHistoryRepository postHistoryRepository = BeanUtils.getBean(PostHistoryRepository.class);
         PostHistory postHistory = new PostHistory();
-        postHistory.setPost(post);
         postHistory.setContent(content);
         postHistoryRepository.save(postHistory);
     }

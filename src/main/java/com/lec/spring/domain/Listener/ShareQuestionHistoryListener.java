@@ -20,8 +20,8 @@ public class ShareQuestionHistoryListener {
     private void createAndSaveHistory(Question question, String content) {
         ShareQuestionHistoryRepository shareQuestionHistoryRepository = BeanUtils.getBean(ShareQuestionHistoryRepository.class);
         ShareQuestionHistory shareQuestionHistory = new ShareQuestionHistory();
-        shareQuestionHistory.setQuestion(question);
         shareQuestionHistory.setContent(content);
+        shareQuestionHistory.setType("공유문제");
         shareQuestionHistoryRepository.save(shareQuestionHistory);
     }
 

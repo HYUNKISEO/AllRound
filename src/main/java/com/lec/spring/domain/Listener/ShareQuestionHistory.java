@@ -19,11 +19,6 @@ public class ShareQuestionHistory extends BaseEntity{
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne
-    @JoinColumn(name = "question_id", foreignKey = @ForeignKey(name = "none", value = ConstraintMode.NO_CONSTRAINT))
-    @JsonIgnore
-    private Question question;
-
     private String content;
 
     private String type = "공유문제";

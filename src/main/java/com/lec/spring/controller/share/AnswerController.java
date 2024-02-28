@@ -1,5 +1,7 @@
 package com.lec.spring.controller.share;
 
+import com.lec.spring.domain.Dto.CheckDto;
+import com.lec.spring.domain.Dto.ShareAnswerDto;
 import com.lec.spring.domain.share.Answer;
 import com.lec.spring.service.share.AnswerService;
 import lombok.RequiredArgsConstructor;
@@ -15,14 +17,10 @@ public class AnswerController {
 
     private final AnswerService answerService;
 
-    @GetMapping("/detail/{id}")
-    public ResponseEntity<?> detail(@PathVariable Long id) {return new ResponseEntity<>(answerService.findById(id), HttpStatus.OK);}
+    @PostMapping("/detail")
+    public ResponseEntity<?> detail(@RequestBody CheckDto answer) {return new ResponseEntity<>(answerService.findById(answer), HttpStatus.OK);}
 
     @PostMapping("/save")
-    public ResponseEntity<?> save(@RequestBody Answer answer) {return new ResponseEntity<>(answerService.save(answer), HttpStatus.OK);}
-
-    @PutMapping("/update")
-    public ResponseEntity<?> update(@RequestBody Answer answer) {return new ResponseEntity<>(answerService.update(answer), HttpStatus.OK);}
-
+    public ResponseEntity<?> save(@RequestBody ShareAnswerDto answer) {return new ResponseEntity<>(answerService.save(answer), HttpStatus.OK);}
 
 }
