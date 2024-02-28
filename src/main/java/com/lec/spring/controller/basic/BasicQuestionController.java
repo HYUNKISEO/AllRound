@@ -19,6 +19,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.File;
 import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.HashMap;
@@ -38,15 +39,13 @@ public class BasicQuestionController {
     private final CompileService compileService;
     private final BasicQuestionService basicQuestionService;
     private final UserCodeRepository userCodeRepository;
-    private final UserCodeService userCodeService; // UserCodeService 주입
     private final UserService userService;
-    public BasicQuestionController(CodeExecutionService codeExecutionService, InputService inputService,  CompileService compileService, UserRepository userRepository, BasicQuestionService basicQuestionService, UserCodeRepository userCodeRepository, UserCodeService userCodeService, UserService userService) {
+    public BasicQuestionController(CodeExecutionService codeExecutionService, InputService inputService,  CompileService compileService , BasicQuestionService basicQuestionService, UserCodeRepository userCodeRepository, UserCodeService userCodeService, UserService userService) {
         this.codeExecutionService = codeExecutionService;
         this.inputService = inputService;
         this.compileService = compileService;
         this.basicQuestionService = basicQuestionService;
         this.userCodeRepository = userCodeRepository;
-        this.userCodeService =userCodeService;
         this.userService = userService;
     }
 
@@ -71,10 +70,7 @@ public class BasicQuestionController {
         LocalDateTime startTime = LocalDateTime.now();
         LocalDateTime endTime = LocalDateTime.now();
 
-        // getRandomValue 메소드를 호출하여 랜덤 값을 가져옴
-        Map<String, Object> randomValues = getRandomValue(questionId);
 
-        // randomValues를 이용하여 inputExample 문자열 구성
         String inputExample = ""; // 초기값 설정
         if (questionId == 1L) {
             // questionId 1에 대한 입력 예시 구성
@@ -82,27 +78,30 @@ public class BasicQuestionController {
         } else if (questionId == 2L) {
             // questionId 2에 대한 입력 예시 구성
             inputExample = randomDouble1 + "\n" + randomDouble2 + "\n" + randomChar;
-        }else if (questionId == 3L) {
+        } else if (questionId == 3L) {
             inputExample = randomInt1 +"\n" + randomInt2;
+        } else if (questionId == 4L) {
+            // questionId 4에 대한 입력 예시 구성
+            inputExample = randomInt1 + " " + randomInt2;
+        } else if (questionId == 5L) {
+            // questionId 5에 대한 입력 예시 구성
+            inputExample = String.valueOf(randomInt1);
         }
-        userCode = codeExecutionService.modifyUserCode(userCode, id, randomDouble1, randomDouble2, randomChar, randomInt1, randomInt2);
+        userCode = codeExecutionService.modifyUserCode(userCode, id, randomDouble1, randomDouble2, randomChar, randomInt1, randomInt2, questionId);
         System.out.println("rrrrrrrr"+userCode);
         // 코드 실행
-        String result = compileService.compileAndExecuteCode(userCode, ogCode, inputExample,  questionId, id);
-//        String result = new String(compileService.compileAndExecuteCode(userCode, ogCode, inputExample, questionId, id).getBytes(StandardCharsets.UTF_8), StandardCharsets.UTF_8);
-        System.out.println(result);
+        String result;
+        if (questionId==4L){
+            result = randomInt1+" - "+randomInt2 +" = "+compileService.compileAndExecuteCode(userCode, ogCode, inputExample,  questionId, id);
+        }else if (questionId==5L){
+            result = randomInt1+"\n"+compileService.compileAndExecuteCode(userCode, ogCode, inputExample,  questionId, id);
+        }
+        else result = compileService.compileAndExecuteCode(userCode, ogCode, inputExample,  questionId, id);
 
-        System.out.println(result + "확인확인확인" + result);
-        System.out.println(userCode);
+
         // 예상 출력 생성
         String expectedOutputExample =inputService.getExpectedOutputExample(randomInt1, randomInt2, randomDouble1, randomDouble2, randomChar, questionId);
-        if (questionId==4L){
 
-        }
-        System.out.println("왜값이 바뀐지 확인하자! : 같은입력을받았음유저코드 : "+result+"\n같은입력을받았음정답코드 : "+expectedOutputExample);
-        // 결과 비교
-
-        System.out.println("마지막확인 : "+result);
         boolean isCorrect = compileService.compareResults(result, expectedOutputExample);
 
         if (isCorrect) {
@@ -119,9 +118,35 @@ public class BasicQuestionController {
                     .build();
 
             userCodeRepository.save(userCodeEntity);
+            String compileOutputDir = "D:\\KDT907\\Dropbox\\K16\\AllRound\\questionNo" + questionId;
+
+
+            // 정답 판정 후에 파일을 삭제합니다.
+            deleteDirectory(compileOutputDir);
+
             return ResponseEntity.ok("정답입니다!\n\n예상 출력:\n" + expectedOutputExample + "\n\n유저의 출력:\n" + result);
         } else {
+            // 오답일 경우에도 파일을 삭제합니다.
+            String compileOutputDir = "D:\\KDT907\\Dropbox\\K16\\AllRound\\questionNo" + questionId;
+            deleteDirectory(compileOutputDir);
             return ResponseEntity.ok("오답입니다.\n\n예상 출력:\n" + expectedOutputExample + "\n\n유저의 출력:\n" + result);
+        }
+
+    }
+    private void deleteDirectory(String directoryPath) {
+        File directory = new File(directoryPath);
+        if (directory.exists()) {
+            File[] files = directory.listFiles();
+            if (files != null) {
+                for (File file : files) {
+                    if (file.isDirectory()) {
+                        deleteDirectory(file.getAbsolutePath());
+                    } else {
+                        file.delete();
+                    }
+                }
+            }
+            directory.delete();
         }
     }
 
@@ -161,10 +186,16 @@ public class BasicQuestionController {
             values.put("randomNumber2", randomNumber2);
             return values;
         }else if (questionId == 4L) {
+            while (randomNumber1 <= randomNumber2) {
+                randomNumber2 = random.nextInt(500) + 1;
+            }
+            values.put("randomNumber1", randomNumber1);
+            values.put("randomNumber2", randomNumber2);
+        }else if (questionId == 5L) {
+            // 문제 5에 대한 검증 로직 추가
             values.put("randomNumber1", randomNumber1);
             values.put("randomNumber2", randomNumber2);
         }
-
         return values;
     }
 
