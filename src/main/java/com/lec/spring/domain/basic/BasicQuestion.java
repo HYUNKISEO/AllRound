@@ -18,13 +18,10 @@ public class BasicQuestion {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-
-    private String question;
-    private String exampleInput;
-    private String exampleOutput;
-    private String comment;
-    private String input;
-    private String output;
+    private Long questionId;
+    private String title;
+    private String description;
+    private String example_Input;
+    private String example_Output;
 
 }
