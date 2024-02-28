@@ -56,6 +56,13 @@ values
     ('2024-02-18 12:20:00', 3, 1, 'Yet another comment'),
     ('2024-02-18 14:50:00', 4, 1, 'Code comment'),
     ('2024-02-18 14:50:00', 5, 1, 'Code comment');
+
+INSERT INTO basic_question (title, description, example_Input, example_Output) VALUES
+                                                                                   ('문제 1', '두 개의 정수를 입력 받아 곱과 몫을 출력하시오.', '16 5', '16 * 5 = 80\n16 / 5 = 3'),
+                                                                                   ('문제 2', '실수 2개와 한 개의 문자를 입력 받아 출력하되 실수는 반올림하여 소수 둘째자리까지 출력하는 프로그램을 작성하시오.', '12.2536\n526.129535\nA', '12.25\n526.13\nA'),
+                                                                                   ('문제 3', '두 개의 정수를 입력받아 다음과 같이 출력하는 프로그램을 작성하시오.', '7 5', '두 개의 수를 입력하시오. 7 5\n7 + 5 = 12\n7 - 5 = 2\n7 * 5 = 35\n7 / 5 = 1\n7 % 5 = 2'),
+                                                                                   ('문제 4', '두 개의 정수를 입력받아 큰 수에서 작은 수를 뺀 차를 출력하는 프로그램을 작성하시오.', '50 85', '35'),
+                                                                                   ('문제 5', '정수를 입력받아 0 이면 "zero" 양수이면 "plus" 음수이면 "minus" 라고 출력하는 프로그램을 작성하시오.', '0', 'zero');\
 ALTER TABLE a_authority_users DROP FOREIGN KEY FKa380he0fhbp59ud7vy865effg;
 ALTER TABLE a_answer DROP FOREIGN KEY FKnbxmksbqyxwpvmf7b0nontlu3;
 ALTER TABLE user_code_question DROP FOREIGN KEY FKiqf2q2eua87qgmfj7wd909ffa;
@@ -76,3 +83,8 @@ DROP TABLE IF EXISTS a_post_history;
 DROP TABLE IF EXISTS basic_history;
 DROP TABLE IF EXISTS a_share_history;
 DROP TABLE IF EXISTS a_like_history;
+
+
+select * from basic_question;
+
+select * from user_code;

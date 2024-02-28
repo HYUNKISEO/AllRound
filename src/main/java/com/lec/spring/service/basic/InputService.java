@@ -21,7 +21,22 @@ public class InputService {
                     randomInt1, randomInt2, randomInt1 * randomInt2,
                     randomInt1, randomInt2, randomInt1 / randomInt2,
                     randomInt1, randomInt2, randomInt1 % randomInt2);
-        }else {
+        }else if (questionId == 4L) {
+            return String.format("%d - %d = %d",randomInt1, randomInt2, Math.abs(randomInt1 - randomInt2));
+
+        }else if (questionId == 5L) {
+                // 문제 5에 대한 예상 출력 예시 생성
+
+                if (randomInt1 == 0) {
+                    return randomInt1+"\nzero";
+                } else if (randomInt1 > 0) {
+                    return randomInt1+"\nplus";
+                } else {
+                    return randomInt1+"\nminus";
+                }
+
+        }
+        else {
             // 유효하지 않은 questionId에 대한 처리
             return "유효하지 않은 questionId";
         }
