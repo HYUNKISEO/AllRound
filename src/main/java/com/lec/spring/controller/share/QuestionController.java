@@ -3,6 +3,7 @@ package com.lec.spring.controller.share;
 import com.lec.spring.domain.Dto.ShareDto;
 import com.lec.spring.service.share.QuestionService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("/share/question")
 @CrossOrigin
+@ComponentScan("com.lec.spring.controller.share")
 public class QuestionController {
 
     private final QuestionService questionService;

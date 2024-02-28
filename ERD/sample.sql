@@ -56,3 +56,23 @@ values
     ('2024-02-18 12:20:00', 3, 1, 'Yet another comment'),
     ('2024-02-18 14:50:00', 4, 1, 'Code comment'),
     ('2024-02-18 14:50:00', 5, 1, 'Code comment');
+ALTER TABLE a_authority_users DROP FOREIGN KEY FKa380he0fhbp59ud7vy865effg;
+ALTER TABLE a_answer DROP FOREIGN KEY FKnbxmksbqyxwpvmf7b0nontlu3;
+ALTER TABLE user_code_question DROP FOREIGN KEY FKiqf2q2eua87qgmfj7wd909ffa;
+ALTER TABLE user_code_question DROP FOREIGN KEY FK8k2v8c3m48s9nucox067k4iud;
+ALTER TABLE a_share_comment DROP FOREIGN KEY FKhqtyj1yslo1irjp60r332m66k;
+DROP TABLE IF EXISTS a_user;
+DROP TABLE IF EXISTS a_authority;
+DROP TABLE IF EXISTS a_user_authorities;
+DROP TABLE IF EXISTS a_post;
+DROP TABLE IF EXISTS a_board_comment;
+DROP TABLE IF EXISTS a_question;
+DROP TABLE IF EXISTS a_like;
+DROP TABLE IF EXISTS basic_question;
+DROP TABLE IF EXISTS basic_attempt;
+DROP TABLE IF EXISTS user_code;
+DROP TABLE IF EXISTS a_user_history;
+DROP TABLE IF EXISTS a_post_history;
+DROP TABLE IF EXISTS basic_history;
+DROP TABLE IF EXISTS a_share_history;
+DROP TABLE IF EXISTS a_like_history;
