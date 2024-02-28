@@ -19,7 +19,7 @@ public class UserController {
     private final UserService userService;
 
     @GetMapping("/detail/{id}")
-    public ResponseEntity<?> detail(@PathVariable(name = "id") Long id) {return new ResponseEntity<>(userService.findById(id), HttpStatus.OK);}
+    public ResponseEntity<?> detail(@PathVariable Long id) {return new ResponseEntity<>(userService.findById(id), HttpStatus.OK);}
 
     @GetMapping("/list")
     public ResponseEntity<?> list() {return new ResponseEntity<>(userService.findAll(), HttpStatus.OK);}

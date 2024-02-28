@@ -2,6 +2,7 @@ package com.lec.spring.controller.basic;
 
 import com.lec.spring.domain.basic.BasicQuestion;
 import com.lec.spring.domain.basic.UserCode;
+import com.lec.spring.domain.share.Question;
 import com.lec.spring.domain.user.User;
 import com.lec.spring.repository.user.UserRepository;
 import com.lec.spring.repository.usercode.UserCodeRepository;
@@ -214,8 +215,18 @@ public class BasicQuestionController {
     }
 
     @DeleteMapping("/delete/{id}")
-    public ResponseEntity<?> deleteQuestion(@PathVariable Long id) {
+    public ResponseEntity<?> deleteQuestion(@PathVariable(name = "id") Long id) {
         String resultMessage = basicQuestionService.delete(id);
         return new ResponseEntity<>(resultMessage, HttpStatus.OK);
+    }
+
+    @GetMapping("/admin/{id}")
+    public ResponseEntity<?> admin(@PathVariable(name = "id") Long id) {
+        return new ResponseEntity<>(basicQuestionService.getQuestionById(id), HttpStatus.OK);
+    }
+
+    @PostMapping("/admin/save")
+    public ResponseEntity<?> BasicSave(@RequestBody BasicQuestion question) {
+        return new ResponseEntity<>(basicQuestionService.save(question), HttpStatus.OK);
     }
 }

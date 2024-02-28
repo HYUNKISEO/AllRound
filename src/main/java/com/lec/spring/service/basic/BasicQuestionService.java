@@ -30,6 +30,7 @@ public class BasicQuestionService {
         return basicQuestionRepository.findAll(pageable);
     }
     public String delete(Long id) {
+        System.out.println(id);
         if(id != null){
         basicQuestionRepository.deleteById(id);
         return "삭제완료";
