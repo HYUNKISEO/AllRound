@@ -33,7 +33,7 @@ public class CompileService {
 
     public String compileAndExecuteCode(String code, String ogCode, String inputExample, long questionId, long id) throws IOException, InterruptedException {
         User user = getUserById(id);
-        String compileOutputDir = "D:\\KDT907\\Dropbox\\K16\\AllRound\\questionNo" + questionId;
+        String compileOutputDir = "D:\\KDT907\\Dropbox\\AllRound\\questionNo" + questionId;
         createDirectoryIfNeeded(compileOutputDir);
         String compileFilePath = compileOutputDir + "\\MainUserId" + id + ".java";
         String originalFilePath = compileOutputDir + "\\OriginalMainUserId" + id + ".java";
