@@ -16,13 +16,19 @@ Again_Coding
 Java, JPA, RESTful API, SpringBoot, SpringSecurity, Scheduled, MySQL, EntityListeners, LomBok, JWT_token, React, React-BootStrap , JavaScript, fetch, JSON, MONACOediter, React-Quill, React-Router&Dom, Git-Hub, Git, POSTMAN, INTELLIJ, Google Drive
 
 ## 버전관리 : Git-Hub
+
 https://github.com/HYUNKISEO/AllRound (Back-End)
+
 https://github.com/HYUNKISEO/allround... (Front-End)
 
 ─────────────────────────
+
 코리아IT아카데미 http://gangnam.koreaisacademy.com/
+
 ●과정명:  (핀테크) Spring 및 Ai 기반 핀테크 프로젝트 구축
+
 ●교육기간 : 2023.09.07 ~ 2023.03.21 (총 963시간)
+
 ●교육내용 
 
 ▶ JAVA 프로그래밍 (120시간)
